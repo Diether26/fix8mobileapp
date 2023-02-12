@@ -1,0 +1,429 @@
+<ion-content>
+  <app-loading *ngIf="loading !== false"></app-loading>
+  <ion-card>
+    <ion-card-header>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>{{ jobOrder.ServiceName }}</ion-card-title>
+          <ion-card-subtitle>Service Name</ion-card-subtitle>
+        </ion-col>
+        <ion-col>
+          <ion-card-title>{{ jobOrder.AppointmentDate }}</ion-card-title>
+          <ion-card-subtitle>Appointment Date</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          <h2 style="text-align: center; color: black;">
+              Job Description
+         </h2>
+         <br>
+         <p style="text-align: center; color: black;">
+           {{jobOrder.Description}}
+         </p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>
+            <h3 style="color: black;"><b>{{jobOrder.JobType}}</b></h3>
+            <p style="color: black;">Job Type</p>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>
+            <h3 style="color: black;"><b>{{jobOrder.latest_activity_status}}</b></h3>
+            <p style="color: black;">Job Status</p>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>
+            <h3 style="color: black;"><b>{{jobOrder.Location}}</b></h3>
+            <p style="color: black;">Address</p>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>
+            <h3 style="color: black;"><b>{{jobOrder.name}}</b></h3>
+            <p style="color: black;">HomeOwner</p>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+            <h2 style="text-align: center; color: black;"> Supporting Documents</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card class="my-card" *ngIf="jobOrder.ServiceName==='Installation'">
+            <img alt="Building Permit" src="{{buildingpermit_url}}{{jobOrder.BuildingPermit}}" class="card-img"/>
+            <ion-card-header>
+              <ion-card-title>Building Permit</ion-card-title>
+              <ion-card-subtitle></ion-card-subtitle>
+            </ion-card-header>
+        
+            <ion-button fill="clear" id="open-modal1" (click)="openmodalpermit(jobOrder.BuildingPermit)">Click to View Image</ion-button>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card class="my-card" *ngIf="jobOrder.ServiceName==='Installation'">
+            <img alt="Blueprint" src="{{blueprint_url}}{{jobOrder.Blueprint}}" class="card-img"/>
+            <ion-card-header>
+              <ion-card-title>Blue Print</ion-card-title>
+              <ion-card-subtitle></ion-card-subtitle>
+            </ion-card-header>
+            <ion-button fill="clear" id="open-modal" (click)="openmodalblueprint(jobOrder.Blueprint)">Click to View Image</ion-button>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <!-- <div class="content_div">
+    <div class="joborder_details">
+      <ion-grid fixed>
+        <h3>Job Information</h3>
+        <ion-row>
+          <ion-col size="12">
+            <div class="flex_div">
+              <div class="round_div">
+                  <img src="../../../assets/email/favicon-32x32.png">
+              </div> 
+              <ion-label class="ion-padding-start round_div_details">
+                <h4><b>{{ jobOrder.ServiceName }}</b></h4>
+                <p>Service Name</p>
+              </ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <div class="flex_div">
+              <div class="round_div">
+                  <img src="../../../assets/email/favicon-32x32.png">
+              </div> 
+              <ion-label class="ion-padding-start round_div_details">
+                <h4><b>{{ jobOrder.JobType }}</b></h4>
+                <p>Job Type</p>
+              </ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <div class="flex_div">
+              <div class="round_div">
+                  <img src="../../../assets/email/favicon-32x32.png">
+              </div> 
+              <ion-label class="ion-padding-start round_div_details">
+                <h4 [ngStyle]="{'color': (jobOrder.latest_activity_status === 'Rejected') ? 'red' : (jobOrder.latest_activity_status === 'In Progress') ? 'orange' : (jobOrder.latest_activity_status === 'Completed') ? '#12465a' : (jobOrder.latest_activity_status === 'Accepted') ? 'green' : ''}"><b>{{ jobOrder.latest_activity_status }}</b></h4>
+                <p>Job Status</p>
+              </ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <div class="flex_div">
+              <div class="round_div">
+                <img src="../../../assets/birthdate/android-chrome-192x192.png">
+              </div> 
+              <ion-label class="ion-padding-start round_div_details">
+                <h4><b>{{ jobOrder.latest_activity_date }}</b></h4>
+                <p>Appointment Date</p>
+              </ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <div class="flex_div">
+              <div class="round_div">
+                  <img src="../../../assets/contact/favicon-32x32.png">
+              </div> 
+              <ion-label class="ion-padding-start round_div_details">
+                <h4><b>{{ jobOrder.ContactNumber }}</b></h4>
+                <p>Contact Number</p>
+              </ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <div class="flex_div">
+              <div class="round_div">
+                <img src="../../../assets/location/favicon-32x32.png">
+              </div> 
+              <ion-label class="ion-padding-start round_div_details">
+                <h4><b>{{ jobOrder.Location }}</b></h4>
+                <p>Job Location</p>
+              </ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <div class="flex_div">
+              <div class="round_div">
+                  <img src="../../../assets/email/favicon-32x32.png">
+              </div> 
+              <ion-label class="ion-padding-start round_div_details">
+                <h4><b>{{ jobOrder.name }}</b></h4>
+                <p>Electrician Assigned</p>
+              </ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+        <h3>Job Description</h3>
+        <ion-row>
+          <ion-col size="12">
+            <div class="flex_div">
+              <ion-label class="ion-padding-start round_div_details">
+                <p>{{ jobOrder.Description }}</p>
+              </ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+        <h3 *ngIf="jobOrder.ServiceName==='Installation'">Supporting Documents</h3>
+        <ion-card class="my-card" *ngIf="jobOrder.ServiceName==='Installation'">
+          <img alt="Building Permit" src="{{buildingpermit_url}}{{jobOrder.BuildingPermit}}" class="card-img"/>
+          <ion-card-header>
+            <ion-card-title>Building Permit</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+      
+          <ion-button fill="clear" id="open-modal1" (click)="openmodalpermit(jobOrder.BuildingPermit)">Click to View Image</ion-button>
+        </ion-card>
+      
+        <ion-card class="my-card" *ngIf="jobOrder.ServiceName==='Installation'">
+          <img alt="Blueprint" src="{{blueprint_url}}{{jobOrder.Blueprint}}" class="card-img"/>
+          <ion-card-header>
+            <ion-card-title>Blue Print</ion-card-title>
+            <ion-card-subtitle></ion-card-subtitle>
+          </ion-card-header>
+          <ion-button fill="clear" id="open-modal" (click)="openmodalblueprint(jobOrder.Blueprint)">Click to View Image</ion-button>
+        </ion-card>
+      </ion-grid>
+    </div>
+  </div> -->
+
+  <ion-modal trigger="open-modal" class="transparent-modal" id="blueprintmodal" *ngIf="jobOrder.ServiceName==='Installation'">
+    <swiper [config]="config" #swiper class="viewImage swiper-container">
+    <ng-template swiperSlide class="viewImage">
+      <ion-content class="viewImage">
+          <div class="swiper-zoom-container viewImage">
+            <img src="{{picURL}}" class="viewImage"/>
+          </div>
+      </ion-content>
+      <ion-footer>
+          <ion-row>
+            <ion-col size="4" class="ion-text-center">
+              
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <ion-button (click)="cancel()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              
+            </ion-col>
+          </ion-row>
+      </ion-footer>
+    </ng-template>
+  </swiper>
+  </ion-modal>
+
+  <ion-modal trigger="open-modal1" class="transparent-modal" id="buildmodal" *ngIf="jobOrder.ServiceName==='Installation'">
+    <swiper [config]="config" #swiper class="viewImage swiper-container">
+    <ng-template swiperSlide class="viewImage">
+      <ion-content class="viewImage">
+          <div class="swiper-zoom-container viewImage">
+            <img src="{{picURL}}" class="viewImage"/>
+          </div>
+      </ion-content>
+      <ion-footer>
+          <ion-row>
+            <ion-col size="4" class="ion-text-center">
+              
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <ion-button (click)="cancel()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              
+            </ion-col>
+          </ion-row>
+      </ion-footer>
+    </ng-template>
+  </swiper>
+  </ion-modal>
+
+  <ion-modal trigger="create-invoice" *ngIf="jobOrder.latest_activity_status === 'In Progress'">
+    <ng-template>
+      <app-loading *ngIf="loadingCI !== false"></app-loading>
+      <ion-header>
+        <ion-toolbar color="secondary">
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title style="text-align: center;">Create Invoice</ion-title>
+          <ion-buttons slot="end">
+            <ion-button [strong]="true" (click)="submitInvoice()">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item lines="none">
+          <div style="width: 100%; height: 10px; border-bottom: 1px solid black; text-align: center">
+            <span style="font-size: 18px; background-color: #F3F5F6; padding: 0 10px;">
+                Invoice Info
+            </span>
+          </div>
+        </ion-item>
+        <ion-item disabled>
+          <ion-label position="stacked">Service Name</ion-label>
+          <ion-input type="text">{{ jobOrder.ServiceName }}</ion-input>
+        </ion-item>
+        <ion-item [ngClass]="{'error-border' :  serviceFeeisnotValid }">
+          <ion-label position="stacked">Service Fee</ion-label>
+          <ion-input type="text" (change)="checkServiceFeeValidity()" (keydown)="checkServiceFeeValidity()" placeholder="0.00"  [(ngModel)]="serviceFee"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="serviceFeeisnotValid">
+          Please Fill out Valid Price!
+        </span>
+        <ion-item disabled>
+            <ion-label position="stacked">Job Type</ion-label>
+            <ion-input type="text">{{ jobOrder.JobType }}</ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Due Date</ion-label>
+          <ion-datetime-button datetime="datetime"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime [(ngModel)]="dueDate" id="datetime" name="appointment" presentation="date"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Total Amount</ion-label>
+          <ion-input type="text" placeholder="0.00" [(ngModel)]="ttl_amount" value="{{sumTotalAmount()}}" disabled></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <div style="width: 100%; height: 10px; border-bottom: 1px solid black; text-align: center">
+            <span style="font-size: 18px; background-color: #F3F5F6; padding: 0 10px;">
+                Invoice Items
+            </span>
+          </div>
+        </ion-item>
+        <ion-item lines="none" style="align-items: flex-start;">
+          <ion-button expand="block" shape="round" color="primary" size="small" slot="end" (click)="addItem()">Add Item</ion-button>
+        </ion-item>
+        <div *ngFor="let item of items; let i = index;">
+          <ion-card>
+            <ion-card-header style="text-align: center;">
+              <ion-card-title>Item {{i+1}}</ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+              <ion-item [ngClass]="{'error-border' :  itemdescisnoValid }">
+                <ion-label position="stacked">Name/Description</ion-label>
+                <ion-input [(ngModel)]="items[i].description" type="text" placeholder="Name/Description" (change)="checkItemDescValidity($event)"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-select [(ngModel)]="items[i].unit" placeholder="Unit" name="Unit" required>
+                  <ion-select-option value="cm">cm</ion-select-option>
+                  <ion-select-option value="m">m</ion-select-option>
+                  <ion-select-option value="g">kg</ion-select-option>
+                  <ion-select-option value="g">g</ion-select-option>
+                  <ion-select-option value="pc">pc</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-select [(ngModel)]="items[i].type" placeholder="Type" name="Service" required>
+                  <ion-select-option *ngFor="let x of itemSelection; let q = index" value="{{x.selectname}}">
+                    {{x.selectname}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item [ngClass]="{'error-border' :  itemqtyisnotValid }">
+                <ion-label position="stacked">Quantity</ion-label>
+                <ion-input type="text" [(ngModel)]="items[i].qty" placeholder="0" (change)="checkItemQtyValidity($event)"></ion-input>
+              </ion-item>
+              <ion-item [ngClass]="{'error-border' :  itempriceisnotValid }">
+                <ion-label position="stacked">Price</ion-label>
+                <ion-input type="text" [(ngModel)]="items[i].price" placeholder="0.00" (change)="checkItemPriceValidity($event)"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Amount</ion-label>
+                <ion-input type="text" placeholder="0.00" [(ngModel)]="items[i].amount" value="{{items[i].qty * items[i].price}}" disabled></ion-input>
+              </ion-item>
+              <ion-button expand="block" shape="round" color="danger" size="small" slot="start" (click)="removeItem(i)">Remove</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </div>
+        <ion-item lines="none">
+          <div style="width: 100%; height: 10px; border-bottom: 1px solid black; text-align: center">
+            <span style="font-size: 18px; background-color: #F3F5F6; padding: 0 10px;">
+                Billing Information
+            </span>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-select [(ngModel)]="paymentMethod" placeholder="Select Payment" (ionChange)="changepayment($event)">
+            <ion-select-option value="Cash on Hand">Cash on Hand</ion-select-option>
+            <ion-select-option value="E-Wallet (GCASH)">E-Wallet (GCASH)</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="showbillinginfo">
+          <ion-label>QR Code</ion-label>
+          <ion-input [(ngModel)]="qrCode" (change)="qrOnChange($event)" type="file" name="qrcode" required></ion-input>
+        </ion-item>
+        <ion-item *ngIf="showbillinginfo">
+          <ion-label position="stacked">Account Number</ion-label>
+          <ion-input [(ngModel)]="accountNumber" type="text" placeholder="**********00"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="showbillinginfo">
+          <ion-label position="stacked">Account Holder</ion-label>
+          <ion-input [(ngModel)]="accountHolder" type="text" placeholder="Account Holder Name"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="showbillinginfo">
+          <ion-label position="stacked">Bankname</ion-label>
+          <ion-input [(ngModel)]="bankName" type="text" placeholder="Backname" disabled="true" value="GCASH"></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+
+<ion-footer no-border *ngIf="jobOrder.latest_activity_status === 'Requested' || jobOrder.latest_activity_status === 'Accepted' || jobOrder.latest_activity_status === 'In Progress'">
+  <ion-toolbar>
+    <ion-row *ngIf="jobOrder.latest_activity_status === 'Requested'" style="margin-top: 5%; margin-bottom: 5%;">
+      <ion-col>
+        <ion-button expand="block" shape="round" color="primary" size="large" (click)="accept()">Accept</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" shape="round" color="danger" size="large" (click)="reject()">Reject</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="jobOrder.latest_activity_status === 'Accepted'" style="margin-top: 5%; margin-bottom: 5%;">
+      <ion-col>
+        <ion-button expand="block" shape="round" color="warning" size="large" (click)="inprogress()">Set as In Progress</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="jobOrder.latest_activity_status === 'In Progress'" style="margin-top: 5%; margin-bottom: 5%;">
+      <ion-col>
+        <ion-button expand="block" shape="round" color="primary" size="large" id="create-invoice">Mark as Done</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

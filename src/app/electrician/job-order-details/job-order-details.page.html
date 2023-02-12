@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Job Order Details</ion-title>
+    <ion-buttons slot="end" (click)="initPopover(true)" id="click-trigger">
+        <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
+    </ion-buttons>
+    <ion-popover [isOpen]="isPopoverOpen" size="auto" trigger="click-trigger">
+      <ng-template>
+        <ion-content>
+          <ion-item style="align-items: center;" (click)="reportUser()">
+            <ion-icon name="megaphone-outline" slot="start"></ion-icon> Report User
+          </ion-item>
+          <ion-item *ngIf="contractDetails.ContractFile === null" style="align-items: center;" (click)="requestContract()">
+            <ion-icon name="reader-outline" slot="start"></ion-icon> Request Contract
+          </ion-item>
+          <ion-item *ngIf="contractDetails && !!contractDetails.ContractFile" style="align-items: center;" (click)="viewContractFile()">
+            <ion-icon name="eye-outline" slot="start"></ion-icon> View Contract
+          </ion-item>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-loading *ngIf="loading !== false"></app-loading>
+  <ion-tabs>
+
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="Home">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="Message">
+        <ion-icon name="mail"></ion-icon>
+        <ion-label>Message</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="Activity">
+        <ion-icon name="analytics"></ion-icon>
+        <ion-label>Activity</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  
+  </ion-tabs>
+</ion-content>

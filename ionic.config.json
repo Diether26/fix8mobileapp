@@ -1,0 +1,7 @@
+{
+  "name": "fix8",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,76 @@
+.error-border{
+    border: red 1px solid;
+}
+.error{
+    margin-top: 10px;
+    color: red;
+}
+ion-item{
+    border-radius: 50px;
+    height: 55px;
+    box-shadow: 1px 8px 8px 0px rgba(0,0,0,0.08);
+    --highlight-height: 0px;
+    margin-top: 15px;
+    border: #66869f 1px solid;
+    ion-input{
+        font-size: 18px;
+        outline-color: #badbf3;
+    }
+    ion-button {
+        font-size: 18px;
+    }
+    #datepicker {
+        border-radius: 50px;
+        margin-top: 20px;
+    }
+}
+
+ion-content{
+    #reg_form{
+        margin-top: 15px;
+    }
+}
+
+#header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+
+    h1{
+        font-weight: 700;
+        font-size: 26px;
+        color: #badbf3;
+    }
+    img{
+        width: 125px;
+        height: 125px;
+        border-radius: 50%;
+    }
+}
+
+ion-textarea.custom-textarea {
+    --background: white;
+    --color: black;
+    --padding-end: 20px;
+    --padding-start: 20px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    --placeholder-opacity: 0.8; 
+    border: #66869f 1px solid;
+    border-radius: 50px;
+  }
+
+  div.txtarea-div{
+    margin-top: 50px;
+  }
+
+  .btn_group{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .reg_form{
+    padding-left: 30px;
+    padding-right: 30px;
+  }

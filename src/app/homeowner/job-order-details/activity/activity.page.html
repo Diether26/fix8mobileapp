@@ -1,0 +1,37 @@
+<ion-content #activityContent>
+  <app-loading *ngIf="loading !== false"></app-loading>
+  <ion-list *ngFor="let item of Activities">
+    <ion-item *ngIf="item.ActionById === UID" lines="none">
+      <ion-badge slot="end" color="primary" style="padding:20px; border-radius: 30px;">
+        <ion-label class="ion-text-wrap ion-text-start">
+          {{ item.Date }}
+        </ion-label>
+        <ion-label *ngIf="item.Type === 'PR'" class="ion-text-wrap ion-text-start">
+          {{ item.ActionByName }} added new update.
+        </ion-label>
+        <ion-label class="ion-text-wrap ion-text-start">
+          {{ item.Remarks }}
+        </ion-label>
+        <!-- <ion-label class="ion-text-wrap ion-text-end">
+          <h5>1 min ago</h5>
+        </ion-label> -->
+      </ion-badge>
+    </ion-item>
+    <ion-item *ngIf="item.ActionById !== UID" lines="none">
+      <ion-badge slot="start" color="secondary" style="padding:20px; border-radius: 30px;">
+        <ion-label class="ion-text-wrap ion-text-start">
+          {{ item.Date }}
+        </ion-label>
+        <ion-label *ngIf="item.Type === 'PR'" class="ion-text-wrap ion-text-start">
+          {{ item.ActionByName }} added new update.
+        </ion-label>
+        <ion-label class="ion-text-wrap ion-text-start">
+          {{ item.Remarks }}
+        </ion-label>
+        <!-- <ion-label class="ion-text-wrap ion-text-start">
+          <h5>1 min ago</h5>
+        </ion-label> -->
+      </ion-badge>
+    </ion-item>
+  </ion-list>
+</ion-content>

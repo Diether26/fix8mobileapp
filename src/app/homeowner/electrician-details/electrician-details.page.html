@@ -1,0 +1,368 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Electrician's Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-loading *ngIf="loading !== false"></app-loading>
+  <ion-row style="margin-top: 30px;">
+    <ion-col size="5">
+      <div *ngIf="elecDetails.Avatar"><img id="profile_img" class="myphoto" src="{{avatar_url}}{{elecDetails.Avatar}}"/></div>
+    </ion-col>
+    <ion-col size="7" style="text-align: center; padding: 15px;">
+      <h5>{{elecDetails.Firstname}} {{elecDetails.Middlename}} {{elecDetails.Lastname}}</h5>
+      <h6 style="color: grey;"><b>Experties</b></h6>
+      <ion-label>{{elecDetails.Experties}}</ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col style="text-align: center;">
+        <ion-card>
+          <ion-card-content>
+            <p style="color: black;"><b>Experience</b></p>
+            <p style="color: black;">{{elecDetails.WorkExperience}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="4" style="text-align: center; border-right: 1px solid black;">
+      <ion-label class="ion-padding-start round_div_details">
+        <h4 *ngIf="feedbackSummary.AverageRate===0 && feedbackSummary.AverageRate<1"><b><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+        <h4 *ngIf="feedbackSummary.AverageRate===1 && feedbackSummary.AverageRate<2"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+        <h4 *ngIf="feedbackSummary.AverageRate===2 && feedbackSummary.AverageRate<3"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+        <h4 *ngIf="feedbackSummary.AverageRate===3 && feedbackSummary.AverageRate<4"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+        <h4 *ngIf="feedbackSummary.AverageRate===4 && feedbackSummary.AverageRate<5"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+        <h4 *ngIf="feedbackSummary.AverageRate===5 && feedbackSummary.AverageRate<6"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon></b></h4>
+        <p>Average Feedback Rate</p>
+      </ion-label>
+    </ion-col>
+  <ion-col size="4" style="text-align: center; border-right: 1px solid black;">
+    <ion-label class="ion-padding-start round_div_details">
+      <h4 *ngIf="feedbackSummary.MaxFeedbackRate===0 && feedbackSummary.MaxFeedbackRate<1"><b><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+      <h4 *ngIf="feedbackSummary.MaxFeedbackRate===1 && feedbackSummary.MaxFeedbackRate<2"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+      <h4 *ngIf="feedbackSummary.MaxFeedbackRate===2 && feedbackSummary.MaxFeedbackRate<3"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+      <h4 *ngIf="feedbackSummary.MaxFeedbackRate===3 && feedbackSummary.MaxFeedbackRate<4"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+      <h4 *ngIf="feedbackSummary.MaxFeedbackRate===4 && feedbackSummary.MaxFeedbackRate<5"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+      <h4 *ngIf="feedbackSummary.MaxFeedbackRate===5 && feedbackSummary.MaxFeedbackRate<6"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon></b></h4>
+      <p>Max Feedback Rate</p>
+    </ion-label>
+  </ion-col>
+  <ion-col size="4" style="text-align: center;">
+    <ion-label class="ion-padding-start round_div_details">
+      <h4 *ngIf="feedbackSummary.MinFeedbackRate===0 && feedbackSummary.MinFeedbackRate<1"><b><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+        <h4 *ngIf="feedbackSummary.MinFeedbackRate===1 && feedbackSummary.MinFeedbackRate<2"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+        <h4 *ngIf="feedbackSummary.MinFeedbackRate===2 && feedbackSummary.MinFeedbackRate<3"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+        <h4 *ngIf="feedbackSummary.MinFeedbackRate===3 && feedbackSummary.MinFeedbackRate<4"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+        <h4 *ngIf="feedbackSummary.MinFeedbackRate===4 && feedbackSummary.MinFeedbackRate<5"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+        <h4 *ngIf="feedbackSummary.MinFeedbackRate===5 && feedbackSummary.MinFeedbackRate<6"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon></b></h4>
+      <p>Minimum Feedback Rate</p>
+    </ion-label>
+  </ion-col>
+</ion-row>
+<ion-card>
+  <ion-card-header>
+    <h4 style="text-align: center; color: black;">Personal Information</h4>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="downloadResume(elecDetails.Resume)"><ion-icon name="document"></ion-icon>&nbsp;Resume</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" (click)="downloadCertificate(elecDetails.Certification)"><ion-icon name="document"></ion-icon>&nbsp;Certificate</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6" style="text-align: left; padding-left: 10px;">
+        <p style="color: black;"><b>Email Address:</b></p>
+      </ion-col>
+      <ion-col size="6" style="text-align: left;">
+        <h5 style="color: black;">{{elecDetails.Email}}</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6" style="text-align: left; padding-left: 10px;">
+        <p style="color: black;"><b>Contact No.:</b></p>
+      </ion-col>
+      <ion-col size="6" style="text-align: left;">
+        <h5 style="color: black;">{{elecDetails.ContactNumber}}</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6" style="text-align: left; padding-left: 10px;">
+        <p style="color: black;"><b>Birthdate:</b></p>
+      </ion-col>
+      <ion-col size="6" style="text-align: left;">
+        <h5 style="color: black;">{{elecDetails.Birthdate}}</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6" style="text-align: left; padding-left: 10px;">
+        <p style="color: black;"><b>Gender:</b></p>
+      </ion-col>
+      <ion-col size="6" style="text-align: left;">
+        <h5 style="color: black;">{{elecDetails.Sex}}</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6" style="text-align: left; padding-left: 10px;">
+        <p style="color: black;"><b>Address:</b></p>
+      </ion-col>
+      <ion-col size="6" style="text-align: left;">
+        <h5 style="color: black;">{{elecDetails.Address}}</h5>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>
+<ion-list>
+  <ion-list-header>
+    <h3>Feedbacks</h3>
+  </ion-list-header>
+  <ion-card class="feedbacks_card" *ngFor="let item of feedback">
+    <ion-card-header>
+      <ion-card-title style="font-size: 16px;">{{item.FeedbackBy}}</ion-card-title>
+      <ion-card-subtitle *ngIf="item.Rate===1"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></ion-card-subtitle>
+      <ion-card-subtitle *ngIf="item.Rate===2"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></ion-card-subtitle>
+      <ion-card-subtitle *ngIf="item.Rate===3"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></ion-card-subtitle>
+      <ion-card-subtitle *ngIf="item.Rate===4"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></ion-card-subtitle>
+      <ion-card-subtitle *ngIf="item.Rate===5"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon></ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <b>{{item.RateDesc}}</b> - {{item.Comment}}
+    </ion-card-content>
+  </ion-card>
+  <ion-button style="padding-left: 10px;" *ngIf="feedbackSummary.TotalFeedbackCount>5" [routerLink]="['Electrician-Feedback', elecDetails.Id]" routerDirection="forward" color="secondary">View More...</ion-button>
+</ion-list>
+<br><br><br><br><br><br><br><br><br>
+  <!-- <div class="main_content_div">
+    <div class="user_div">
+        <div class="first_div">
+            <ion-label class="username">{{elecDetails.Firstname}} {{elecDetails.Middlename}} {{elecDetails.Lastname}}</ion-label>
+        </div>
+        <div *ngIf="elecDetails.Avatar"><img id="profile_img" src="{{avatar_url}}{{elecDetails.Avatar}}"/></div>
+    </div>
+
+    <div class="content_div">
+      <div class="profile_details">
+        <ion-grid fixed>
+          <h3>Rating ({{feedbackSummary.TotalFeedbackCount}})</h3>
+          <ion-row>
+            <ion-col size="12">
+              <div class="flex_div">
+                <div class="round_div">
+                    <img src="../../../assets/star/android-chrome-192x192.png">
+                </div> 
+                <ion-label class="ion-padding-start round_div_details">
+                  <h4 *ngIf="feedbackSummary.AverageRate===0 && feedbackSummary.AverageRate<1"><b><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.AverageRate===1 && feedbackSummary.AverageRate<2"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.AverageRate===2 && feedbackSummary.AverageRate<3"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.AverageRate===3 && feedbackSummary.AverageRate<4"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.AverageRate===4 && feedbackSummary.AverageRate<5"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.AverageRate===5 && feedbackSummary.AverageRate<6"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon></b></h4>
+                  <p>Average Feedback Rate</p>
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <div class="flex_div">
+                <div class="round_div">
+                    <img src="../../../assets/graph-increase/android-chrome-192x192.png">
+                </div> 
+                <ion-label class="ion-padding-start round_div_details">
+                  <h4 *ngIf="feedbackSummary.MaxFeedbackRate===0 && feedbackSummary.MaxFeedbackRate<1"><b><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.MaxFeedbackRate===1 && feedbackSummary.MaxFeedbackRate<2"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.MaxFeedbackRate===2 && feedbackSummary.MaxFeedbackRate<3"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.MaxFeedbackRate===3 && feedbackSummary.MaxFeedbackRate<4"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.MaxFeedbackRate===4 && feedbackSummary.MaxFeedbackRate<5"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.MaxFeedbackRate===5 && feedbackSummary.MaxFeedbackRate<6"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon></b></h4>
+                  <p>Max Feedback Rate</p>
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+          <ion-col size="12">
+            <div class="flex_div">
+              <div class="round_div">
+                  <img src="../../../assets/graph-decrease/android-chrome-192x192.png">
+              </div> 
+              <ion-label class="ion-padding-start round_div_details">
+                <h4 *ngIf="feedbackSummary.MinFeedbackRate===0 && feedbackSummary.MinFeedbackRate<1"><b><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.MinFeedbackRate===1 && feedbackSummary.MinFeedbackRate<2"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.MinFeedbackRate===2 && feedbackSummary.MinFeedbackRate<3"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.MinFeedbackRate===3 && feedbackSummary.MinFeedbackRate<4"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.MinFeedbackRate===4 && feedbackSummary.MinFeedbackRate<5"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></b></h4>
+                  <h4 *ngIf="feedbackSummary.MinFeedbackRate===5 && feedbackSummary.MinFeedbackRate<6"><b><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon></b></h4>
+                <p>Minimum Feedback Rate</p>
+              </ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+          <h3>Personal Information</h3>
+        <ion-row>
+          <ion-col size="12">
+            <div class="flex_div">
+              <div class="round_div">
+                  <img src="../../../assets/email/favicon-32x32.png">
+              </div> 
+              <ion-label class="ion-padding-start round_div_details">
+                <h4><b>{{elecDetails.Email}}</b></h4>
+                <p>Email Address</p>
+              </ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+            <ion-row>
+            <ion-col size="12">
+              <div class="flex_div">
+                <div class="round_div">
+                    <img src="../../../assets/contact/favicon-32x32.png">
+                </div> 
+                <ion-label class="ion-padding-start round_div_details">
+                  <h4><b>{{elecDetails.ContactNumber}}</b></h4>
+                  <p>Contact Number</p>
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <div class="flex_div">
+                <div class="round_div">
+                    <img src="../../../assets/birthdate/android-chrome-192x192.png">
+                </div> 
+                <ion-label class="ion-padding-start round_div_details">
+                  <h4><b>{{elecDetails.Birthdate}}</b></h4>
+                  <p>Birthdate</p>
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <div class="flex_div">
+                <div class="round_div">
+                    <img src="../../../assets/gender/favicon-32x32.png">
+                </div> 
+                <ion-label class="ion-padding-start round_div_details">
+                  <h4><b>{{elecDetails.Sex}}</b></h4>
+                  <p>Gender</p>
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <div class="flex_div">
+                <div class="round_div">
+                    <img src="../../../assets/location/favicon-32x32.png">
+                </div> 
+                <ion-label class="ion-padding-start round_div_details">
+                  <h4><b>
+                    {{elecDetails.Address}}
+                  </b></h4>
+                  <p>Address</p>
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          </ion-grid>
+      </div>
+      <div class="feedbacks_div">
+        <ion-list>
+        <ion-list-header>
+          <h3>Feedbacks</h3>
+        </ion-list-header>
+        <ion-card class="feedbacks_card" *ngFor="let item of feedback">
+          <ion-card-header>
+            <ion-card-title style="font-size: 16px;">{{item.FeedbackBy}}</ion-card-title>
+            <ion-card-subtitle *ngIf="item.Rate===1"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></ion-card-subtitle>
+            <ion-card-subtitle *ngIf="item.Rate===2"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></ion-card-subtitle>
+            <ion-card-subtitle *ngIf="item.Rate===3"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></ion-card-subtitle>
+            <ion-card-subtitle *ngIf="item.Rate===4"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></ion-card-subtitle>
+            <ion-card-subtitle *ngIf="item.Rate===5"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon></ion-card-subtitle>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <b>{{item.RateDesc}}</b> - {{item.Comment}}
+          </ion-card-content>
+        </ion-card>
+        <ion-button *ngIf="feedbackSummary.TotalFeedbackCount>5" [routerLink]="['Electrician-Feedback', elecDetails.Id]" routerDirection="forward" color="secondary">View More...</ion-button>
+      </ion-list>
+      </div>
+    </div> 
+
+  </div> -->
+</ion-content>
+<br><br><br><br><br><br><br>
+<app-slide-drawer>
+  <app-loading *ngIf="loadingCreate !== false"></app-loading>
+  <div id="content_div">
+    <form id="reg_form" (submit)="submitForm($event)">
+     <ion-item lines="none">
+      <ion-select [(ngModel)]="JobOrder.Service" [ngModelOptions]="{standalone: true}" (ionChange)="serviceOnSelect($event)" placeholder="Service" name="Service" required>
+        <ion-select-option value="Installation">Installation</ion-select-option>
+        <ion-select-option value="Rewiring">Rewiring</ion-select-option>
+        <ion-select-option value="Aircon Installation">Aircon Installation</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-select [(ngModel)]="JobOrder.JobType" [ngModelOptions]="{standalone: true}" placeholder="JobType" name="JobType">
+        <ion-select-option value="Labor">Labor</ion-select-option>
+        <ion-select-option value="Labor and Materials">Labor and Materials</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="txtarea-div">
+      <ion-textarea [(ngModel)]="JobOrder.Description" [ngModelOptions]="{standalone: true}" class="custom-textarea" (change)="descOnChange($event)" placeholder="Type Description here..." [autoGrow]="true">
+      </ion-textarea>
+    </div>
+    <span class="error ion-padding" *ngIf="descisnotValid">
+      Description Must not exceed 500 characters!
+    </span>
+    <ion-item lines="none" [ngClass]="{'error-border' :  numisnotValid}">
+      <ion-label position="floating">Phone Number</ion-label>
+      <ion-input type="text" name="ContactNumber" [(ngModel)]="JobOrder.PhoneNumber" [ngModelOptions]="{standalone: true}" (change)="noOnChange($event)" required></ion-input>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="numisnotValid">
+      Number must a valid PH number!
+    </span>
+    <ion-item lines="none">
+      <ion-label position="floating">Location</ion-label>
+      <ion-input type="text" name="location" [(ngModel)]="JobOrder.Location" [ngModelOptions]="{standalone: true}" (change)="LocationOnchange($event)" required></ion-input>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="locationisnotValid">
+      Location Must not exceed 500 characters!
+    </span>
+    <ion-item id="datepicker" lines="none">
+      <ion-label>Appointment Date</ion-label>
+      <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime [(ngModel)]="JobOrder.AppointmentDate" [ngModelOptions]="{standalone: true}" id="datetime" name="appointment" presentation="date"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+    </ion-item>
+    <ion-item *ngIf="isInstallation" lines="none">
+      <ion-label>Blueprint</ion-label>
+      <ion-input type="file" name="blueprint" (change)="blueprintOnchange($event)" required></ion-input>
+    </ion-item>
+    <ion-item  *ngIf="isInstallation" lines="none">
+      <ion-label>Building Permit</ion-label>
+      <ion-input type="file" name="buildingpermit" (change)="buildingPermitOnchange($event)" required></ion-input>
+    </ion-item>
+    <ion-row style="margin-top: 20px; margin-bottom: 50px;">
+      <ion-col>
+        <ion-button type="submit" expand="block" shape="round" color="primary" size="large">Create Job Order</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+  </div>
+</app-slide-drawer>

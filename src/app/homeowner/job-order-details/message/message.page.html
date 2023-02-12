@@ -1,0 +1,34 @@
+
+<ion-content #messagesContent>
+  <app-loading *ngIf="loading !== false"></app-loading>
+  <ion-list *ngFor="let item of Messages">
+    <ion-item *ngIf="item.SenderId === UID" lines="none" class="ion-text-end">
+      <ion-badge slot="end" color="primary" style="padding:20px; border-radius: 30px;">
+        <ion-label>{{ item.Content }}</ion-label>
+      </ion-badge>
+    </ion-item>
+    <ion-item *ngIf="item.SenderId !== UID" lines="none" class="ion-text-start">
+      <ion-badge slot="start" color="secondary" style="padding:20px; border-radius: 30px;">
+        <ion-label>{{ item.Content }}</ion-label>
+      </ion-badge>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer no-border>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-textarea
+        lineHeight="20" 
+        maxExpand="5"
+        placeholder='Send a message'
+        (ionFocus)="selectTextarea()"
+        [(ngModel)]="Content"
+        (ngModelChange)='onChange($event)'>
+      </ion-textarea>
+      <ion-button fill="clear" (mousedown)="preventFocusChange($event)" (click)="sendMessage()" style="margin-top: 18px;">
+        <ion-icon slot="icon-only" name="send"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>
+

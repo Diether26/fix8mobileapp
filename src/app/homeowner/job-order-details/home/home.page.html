@@ -1,0 +1,420 @@
+<ion-content>
+  <app-loading *ngIf="loading !== false"></app-loading>
+  <ion-card>
+    <ion-card-header>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>{{ jobOrder.ServiceName }}</ion-card-title>
+          <ion-card-subtitle>Service Name</ion-card-subtitle>
+        </ion-col>
+        <ion-col>
+          <ion-card-title>{{ jobOrder.AppointmentDate }}</ion-card-title>
+          <ion-card-subtitle>Appointment Date</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          <h2 style="text-align: center; color: black;">
+              Job Description
+         </h2>
+         <br>
+         <p style="text-align: center; color: black;">
+           {{jobOrder.Description}}
+         </p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>
+            <h3 style="color: black;"><b>{{jobOrder.JobType}}</b></h3>
+            <p style="color: black;">Job Type</p>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>
+            <h3 style="color: black;"><b>{{jobOrder.latest_activity_status}}</b></h3>
+            <p style="color: black;">Job Status</p>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>
+            <h3 style="color: black;"><b>{{jobOrder.Location}}</b></h3>
+            <p style="color: black;">Address</p>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>
+            <h3 style="color: black;"><b>{{jobOrder.name}}</b></h3>
+            <p style="color: black;">Electrician</p>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+            <h2 style="text-align: center; color: black;"> Supporting Documents</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card class="my-card" *ngIf="jobOrder.ServiceName==='Installation'">
+            <img alt="Building Permit" src="{{buildingpermit_url}}{{jobOrder.BuildingPermit}}" class="card-img"/>
+            <ion-card-header>
+              <ion-card-title>Building Permit</ion-card-title>
+              <ion-card-subtitle></ion-card-subtitle>
+            </ion-card-header>
+        
+            <ion-button fill="clear" id="open-modal1" (click)="openmodalpermit(jobOrder.BuildingPermit)">Click to View Image</ion-button>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card class="my-card" *ngIf="jobOrder.ServiceName==='Installation'">
+            <img alt="Blueprint" src="{{blueprint_url}}{{jobOrder.Blueprint}}" class="card-img"/>
+            <ion-card-header>
+              <ion-card-title>Blue Print</ion-card-title>
+              <ion-card-subtitle></ion-card-subtitle>
+            </ion-card-header>
+            <ion-button fill="clear" id="open-modal" (click)="openmodalblueprint(jobOrder.Blueprint)">Click to View Image</ion-button>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+    <!-- <div class="content_div">
+      <div class="joborder_details">
+        <ion-grid fixed>
+          <h3>Job Information</h3>
+          <ion-row>
+            <ion-col size="12">
+              <div class="flex_div">
+                <div class="round_div">
+                    <img src="../../../assets/email/favicon-32x32.png">
+                </div> 
+                <ion-label class="ion-padding-start round_div_details">
+                  <h4><b>{{ jobOrder.ServiceName }}</b></h4>
+                  <p>Service Name</p>
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <div class="flex_div">
+                <div class="round_div">
+                    <img src="../../../assets/email/favicon-32x32.png">
+                </div> 
+                <ion-label class="ion-padding-start round_div_details">
+                  <h4><b>{{ jobOrder.JobType }}</b></h4>
+                  <p>Job Type</p>
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <div class="flex_div">
+                <div class="round_div">
+                    <img src="../../../assets/email/favicon-32x32.png">
+                </div> 
+                <ion-label class="ion-padding-start round_div_details">
+                  <h4 [ngStyle]="{'color': (jobOrder.latest_activity_status === 'Rejected') ? 'red' : (jobOrder.latest_activity_status === 'In Progress') ? 'orange' : (jobOrder.latest_activity_status === 'Completed') ? '#12465a' : (jobOrder.latest_activity_status === 'Accepted') ? 'green' : ''}"><b>{{ jobOrder.latest_activity_status }}</b></h4>
+                  <p>Job Status</p>
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <div class="flex_div">
+                <div class="round_div">
+                  <img src="../../../assets/birthdate/android-chrome-192x192.png">
+                </div> 
+                <ion-label class="ion-padding-start round_div_details">
+                  <h4><b>{{ jobOrder.latest_activity_date }}</b></h4>
+                  <p>Appointment Date</p>
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <div class="flex_div">
+                <div class="round_div">
+                    <img src="../../../assets/contact/favicon-32x32.png">
+                </div> 
+                <ion-label class="ion-padding-start round_div_details">
+                  <h4><b>{{ jobOrder.ContactNumber }}</b></h4>
+                  <p>Contact Number</p>
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <div class="flex_div">
+                <div class="round_div">
+                  <img src="../../../assets/location/favicon-32x32.png">
+                </div> 
+                <ion-label class="ion-padding-start round_div_details">
+                  <h4><b>{{ jobOrder.Location }}</b></h4>
+                  <p>Job Location</p>
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <div class="flex_div">
+                <div class="round_div">
+                    <img src="../../../assets/email/favicon-32x32.png">
+                </div> 
+                <ion-label class="ion-padding-start round_div_details">
+                  <h4><b>{{ jobOrder.name }}</b></h4>
+                  <p>Electrician Assigned</p>
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <h3>Job Description</h3>
+          <ion-row>
+            <ion-col size="12">
+              <div class="flex_div">
+                <ion-label class="ion-padding-start round_div_details">
+                  <p>{{ jobOrder.Description }}</p>
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <h3 *ngIf="jobOrder.ServiceName==='Installation'">Supporting Documents</h3>
+          <ion-card class="my-card" *ngIf="jobOrder.ServiceName==='Installation'">
+            <img alt="Building Permit" src="{{buildingpermit_url}}{{jobOrder.BuildingPermit}}" class="card-img"/>
+            <ion-card-header>
+              <ion-card-title>Building Permit</ion-card-title>
+              <ion-card-subtitle></ion-card-subtitle>
+            </ion-card-header>
+        
+            <ion-button fill="clear" id="open-modal1" (click)="openmodalpermit(jobOrder.BuildingPermit)">Click to View Image</ion-button>
+          </ion-card>
+        
+          <ion-card class="my-card" *ngIf="jobOrder.ServiceName==='Installation'">
+            <img alt="Blueprint" src="{{blueprint_url}}{{jobOrder.Blueprint}}" class="card-img"/>
+            <ion-card-header>
+              <ion-card-title>Blue Print</ion-card-title>
+              <ion-card-subtitle></ion-card-subtitle>
+            </ion-card-header>
+            <ion-button fill="clear" id="open-modal" (click)="openmodalblueprint(jobOrder.Blueprint)">Click to View Image</ion-button>
+          </ion-card>
+        </ion-grid>
+      </div>
+    </div> -->
+
+  <ion-modal trigger="open-modal" class="transparent-modal" id="blueprintmodal" *ngIf="jobOrder.ServiceName==='Installation'">
+    <div class="viewImage">
+    <ng-template swiperSlide class="viewImage">
+      <ion-content class="viewImage">
+          <div class="swiper-zoom-container viewImage">
+            <img src="{{picURL}}" class="viewImage"/>
+          </div>
+      </ion-content>
+      <ion-footer>
+          <ion-row>
+            <ion-col size="4" class="ion-text-center">
+              
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <ion-button (click)="cancel()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              
+            </ion-col>
+          </ion-row>
+      </ion-footer>
+    </ng-template>
+  </div>
+  </ion-modal>
+
+  <ion-modal trigger="open-modal1" class="transparent-modal" id="buildmodal" *ngIf="jobOrder.ServiceName==='Installation'">
+    <div class="viewImage">
+    <ng-template swiperSlide class="viewImage">
+      <ion-content class="viewImage">
+          <div class="swiper-zoom-container viewImage">
+            <img src="{{picURL}}" class="viewImage"/>
+          </div>
+      </ion-content>
+      <ion-footer>
+          <ion-row>
+            <ion-col size="4" class="ion-text-center">
+              
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <ion-button (click)="cancel()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              
+            </ion-col>
+          </ion-row>
+      </ion-footer>
+    </ng-template>
+  </div>
+  </ion-modal>
+
+  <ion-modal [isOpen]="modal === 'Cancel JO'">
+    <ng-template>
+      <app-loading *ngIf="cancelJO.loading !== false"></app-loading>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="initModal('')">Back</ion-button>
+          </ion-buttons>
+          <ion-title class="ion-text-center">Enter Reason</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirmCancelJO()" [strong]="true">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item lines="none">
+          <ion-textarea rows="10" class="custom-textarea" [autoGrow]="true" type="text" placeholder="Please enter reason why you want to cancel this job order.." [(ngModel)]="cancelJO.reason"></ion-textarea>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <ion-modal [isOpen]="modal === 'Payment'">
+    <ng-template>
+      <app-loading *ngIf="feedback.loading !== false"></app-loading>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="initModal('')">CANCEL</ion-button>
+          </ion-buttons>
+          <ion-title class="ion-text-center">Pay</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="submitFeedback()" [strong]="true">SUBMIT</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item lines="none" class="custom-for-select">
+          <ion-select placeholder="Select Rating" name="Rate" [(ngModel)]="feedback.rate">
+            <ion-select-option value="1">Very Unsatisfied</ion-select-option>
+            <ion-select-option value="2">Unsatisfied</ion-select-option>
+            <ion-select-option value="3">Neutral</ion-select-option>
+            <ion-select-option value="4">Satisfied</ion-select-option>
+            <ion-select-option value="5">Very Satisfied</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item lines="none" class="custom-textarea">
+          <ion-textarea rows="10" [autoGrow]="true" type="text" placeholder="Write a comment..." [(ngModel)]="feedback.comment"></ion-textarea>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <ion-modal [isOpen]="modal === 'Feedback'">
+    <ng-template>
+      <app-loading *ngIf="feedback.loading !== false"></app-loading>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="initModal('')">CANCEL</ion-button>
+          </ion-buttons>
+          <ion-title class="ion-text-center">Write Feedback</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="submitFeedback()" [strong]="true">SUBMIT</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item lines="none" class="custom-for-select">
+          <ion-select placeholder="Select Rating" name="Rate" [(ngModel)]="feedback.rate">
+            <ion-select-option value="1">Very Unsatisfied</ion-select-option>
+            <ion-select-option value="2">Unsatisfied</ion-select-option>
+            <ion-select-option value="3">Neutral</ion-select-option>
+            <ion-select-option value="4">Satisfied</ion-select-option>
+            <ion-select-option value="5">Very Satisfied</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item lines="none" class="custom-textarea">
+          <ion-textarea rows="10" [autoGrow]="true" type="text" placeholder="Write a comment..." [(ngModel)]="feedback.comment"></ion-textarea>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="modal === 'Payment'">
+    <ng-template>
+      <app-loading *ngIf="payment.loading !== false"></app-loading>
+      <ion-header>
+        <ion-toolbar color="secondary">
+          <ion-buttons slot="start">
+            <ion-button (click)="initModal('')">CANCEL</ion-button>
+          </ion-buttons>
+          <ion-title class="ion-text-center">Payment</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="submitProofOfPayment()" [strong]="true">SUBMIT</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item lines="none" class="custom-for-select">
+          <ion-select placeholder="Select Payment Method" name="PaymentMethod" [(ngModel)]="payment.PaymentMethod" (ionChange)="changePaymentMethod()">
+            <ion-select-option value="Cash on Hand">CASH</ion-select-option>
+            <ion-select-option value="E-Wallet (GCASH)">E-WALLET(GCASH)</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item lines="none" class="custom-for-select" hidden>
+          <ion-label position="floating">Amount</ion-label>
+          <ion-input  type="text" name="amount" required [(ngModel)]="payment.amount"></ion-input>
+        </ion-item>
+        <ion-item lines="none" *ngIf="isCash">
+          <div style="width: 100%; height: 10px; border-bottom: 1px solid black; text-align: center">
+            <span style="font-size: 18px; background-color: #F3F5F6; padding: 0 10px;">
+                E-WALLET(GCASH) INFORMATION
+            </span>
+          </div>
+        </ion-item>
+        <ion-item lines="none" class="custom-for-select" *ngIf="isCash">
+          <ion-label position="floating">Reference No.</ion-label>
+          <ion-input  type="text" name="amount" required [(ngModel)]="payment.refno"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="custom-for-select" *ngIf="isCash">
+          <ion-label>Receipt Screenshot</ion-label>
+          <ion-input type="file" name="receipt" required [(ngModel)]="payment.receipt" (change)="GetFileValue($event)"></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+<ion-footer no-border *ngIf="jobOrder.latest_activity_status === 'Requested' || jobOrder.latest_activity_status === 'Accepted' || jobOrder.latest_activity_status === 'In Progress' || jobOrder.latest_activity_status === 'Completed' || jobOrder.latest_activity_status === 'Done'">
+  <ion-toolbar>
+    <ion-row *ngIf="jobOrder.latest_activity_status === 'Requested' || jobOrder.latest_activity_status === 'Accepted' || jobOrder.latest_activity_status === 'In Progress'" style="margin-top: 5%; margin-bottom: 5%;">
+      <ion-col>
+        <ion-button expand="block" shape="round" color="warning" size="large" (click)="initModal('Cancel JO')">Cancel</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="jobOrder.latest_activity_status === 'Done'" style="margin-top: 5%; margin-bottom: 5%;">
+      <ion-col>
+        <ion-button expand="block" shape="round" color="primary" size="large" (click)="initModal('Payment')">PAY</ion-button>        
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="(jobOrder.latest_activity_status === 'Completed' || jobOrder.latest_activity_status === 'Cancelled') && hasFeedback === false" style="margin-top: 5%; margin-bottom: 5%;">
+      <ion-col>        
+        <ion-button expand="block" shape="round" color="primary" size="large" (click)="initModal('Feedback')">Give Feedback</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="hasFeedback === true" style="margin-top: 5%; margin-bottom: 5%;">
+      <ion-col class="ion-text-center ion-padding">
+        <ion-label>You already have submitted your feedback!</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

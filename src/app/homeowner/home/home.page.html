@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <app-loading *ngIf="loading !== false"></app-loading>
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"></ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of electricians">
+      <ion-item-options side="end">
+        <ion-item-option color="primary" [routerLink]="['Electrician-Details', item.Id]" routerDirection="forward">VIEW PROFILE</ion-item-option>
+      </ion-item-options>
+      <ion-item>
+        <ion-thumbnail>
+          <ion-img class="img" src="{{ avatar_url }}{{ item.Avatar }}"></ion-img>
+        </ion-thumbnail>
+        <ion-label class="ion-padding-start">
+          <h4><b>{{ item.Firstname }} {{item.Middlename}} {{item.Lastname}}</b></h4>
+          <p *ngIf="item.AverageRate===0">
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+          </p>
+          <p *ngIf="item.AverageRate===1">
+            <ion-icon name="star" class="star-rating"></ion-icon>
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+          </p>
+          <p *ngIf="item.AverageRate===2">
+            <ion-icon name="star" class="star-rating"></ion-icon>
+            <ion-icon name="star" class="star-rating"></ion-icon>
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+          </p>
+          <p *ngIf="item.AverageRate===3">
+            <ion-icon name="star" class="star-rating"></ion-icon>
+            <ion-icon name="star" class="star-rating"></ion-icon>
+            <ion-icon name="star" class="star-rating"></ion-icon>
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+          </p>
+          <p *ngIf="item.AverageRate===4">
+            <ion-icon name="star" class="star-rating"></ion-icon>
+            <ion-icon name="star" class="star-rating"></ion-icon>
+            <ion-icon name="star" class="star-rating"></ion-icon>
+            <ion-icon name="star" class="star-rating"></ion-icon>
+            <ion-icon name="star-outline" class="star-rating"></ion-icon>
+          </p>
+          <p *ngIf="item.AverageRate===5">
+            <ion-icon name="star" class="star-rating"></ion-icon>
+            <ion-icon name="star" class="star-rating"></ion-icon>
+            <ion-icon name="star" class="star-rating"></ion-icon>
+            <ion-icon name="star" class="star-rating"></ion-icon>
+            <ion-icon name="star" class="star-rating"></ion-icon>
+          </p>
+        </ion-label>
+        <ion-icon slot="end" name="chevron-back-outline"></ion-icon>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+

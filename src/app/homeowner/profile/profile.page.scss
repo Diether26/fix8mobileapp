@@ -1,0 +1,83 @@
+#profile_img{
+    border-radius: 50%;
+    border: 2px solid #2980b9;
+    padding: 2px;
+    width: 125px;
+    height: 125px;
+}
+.main_content_div{
+    width: 100%;
+    .menu_btn{
+        position: absolute;
+        top: 40px;
+        left: 10px;
+    }
+    .user_div{
+        padding: 20px;
+        width: 100;
+        height: 260px;
+        background: linear-gradient(to right, #2980b9 0%, #f5f3f4 100%);
+        display: flex;
+        justify-content: space-between;
+        padding-top: 40px;
+        .first_div{
+            padding-top: 70px;
+            .username{
+                font-size: 18px;
+                color: white;
+                font-weight: 600;
+            }
+        }
+    }
+    .content_div{
+        background: white;
+        width: 100%;
+        margin-top: -90px;
+        padding: 20px;
+        padding-top: 30px;
+
+        .profile_details{
+            width: 100%;
+            border-radius: 5px;
+            box-shadow: 0px 3px 6px rgba(0,0,0,3);
+            margin-top: 40px;
+            padding: 30px;
+
+            ion-grid{
+                padding: 0;
+                align-items: center;
+                ion-col{
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                }
+                .flex_div{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    .round_div{
+                        height: 40px;
+                        width: 40px;
+                        border-radius: 100%;
+                        background-color: white;
+                        position: relative;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+
+        .list_div{
+            display: flex;
+            justify-content: space-between;
+            border-radius: 5px;
+            box-shadow: 0px 3px 6px rgba(0,0,0,3);
+            margin-top: 20px;
+            padding: 15px;
+
+            ion-icon{
+                font-size: 20px;
+            }
+        }
+    }
+   
+}

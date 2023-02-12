@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>All Electrician's Feedback</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-loading *ngIf="loading !== false"></app-loading>
+  <ion-card *ngFor="let item of allfeedbacks">
+    <ion-card-header>
+      <ion-card-title style="font-size: 16px;">{{item.FeedbackBy}}</ion-card-title>
+      <ion-card-subtitle *ngIf="item.Rate===1"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></ion-card-subtitle>
+      <ion-card-subtitle *ngIf="item.Rate===2"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></ion-card-subtitle>
+      <ion-card-subtitle *ngIf="item.Rate===3"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></ion-card-subtitle>
+      <ion-card-subtitle *ngIf="item.Rate===4"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star-outline" class="star-rating"></ion-icon></ion-card-subtitle>
+      <ion-card-subtitle *ngIf="item.Rate===5"><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon><ion-icon name="star" class="star-rating"></ion-icon></ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <b>{{item.RateDesc}}</b> - {{item.Comment}}
+    </ion-card-content>
+  </ion-card>
+</ion-content>

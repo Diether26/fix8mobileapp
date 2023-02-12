@@ -1,0 +1,57 @@
+// https://www.youtube.com/watch?v=SyrS10a6Ctc 
+.error-border{
+    border: red 1px solid;
+}
+.error{
+    margin-top: 10px;
+    color: red;
+}
+ion-item{
+    border-radius: 60px;
+    height: 55px;
+    --highlight-height: 0px;
+    margin-top: 15px;
+    border: #66869f 1px solid;
+    align-items: center;
+    ion-input{
+        font-size: 18px;
+    }
+    
+}
+
+ion-content{
+    #header{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+
+        h1{
+            font-weight: 700;
+            font-size: 26px;
+            color: #12465a;
+        }
+        img{
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+        }
+    }
+    #form{
+        margin-top: 15px;
+        padding-left: 50px;
+        padding-right: 50px;
+        align-items: center;
+    }
+
+
+    #logindiv{
+        margin-top: 30px;
+    }
+    .small-text{
+        color: #12465a;
+    }
+    .sgn_btn {
+        font-size: 15px;
+    }
+}

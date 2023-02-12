@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Update Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-loading *ngIf="loading !== false"></app-loading>
+  <form id="reg_form" (submit)="submitForm($event)" novalidate>
+    <div class="reg_form">
+      <div id="header">
+        <img [src]="url" *ngIf="url" />
+      </div>
+      <ion-item [ngClass]="{'error-border' :  fileisnotValid }" lines="none">
+        <ion-label>Avatar</ion-label>
+        <ion-input type="file" (change)="profilepicOnchange($event)" required></ion-input>
+      </ion-item>
+      <ion-item [ngClass]="{'error-border' :  fnameisnotValid}" lines="full">
+        <ion-label position="floating">Firstname</ion-label>
+        <ion-input type="text" name="Firstname" (change)="fnOnChange($event)" [ngModelOptions]="{standalone: true}"  [(ngModel)]="me.Firstname" required></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="fnameisnotValid">
+        Firstname must contain letters with spaces only!
+      </span>
+      <ion-item [ngClass]="{'error-border' :  mnameisnotValid}" lines="full">
+        <ion-label position="floating">Middlename</ion-label>
+        <ion-input type="text" name="Middlename" (change)="mnOnChange($event)" [ngModelOptions]="{standalone: true}"  [(ngModel)]="me.Middlename" required></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="mnameisnotValid">
+        Middlename must contain letters with spaces only!
+      </span>
+      <ion-item [ngClass]="{'error-border' :  lnameisnotValid}" lines="full">
+        <ion-label position="floating">Lastname</ion-label>
+        <ion-input type="text" name="Lastname" (change)="lnOnChange($event)" [ngModelOptions]="{standalone: true}"  [(ngModel)]="me.Lastname" required></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="lnameisnotValid">
+        Lastname must contain letters with spaces only!
+      </span>
+      <ion-item [ngClass]="{'error-border' :  emailisnotValid}" lines="full">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="text" name="Email" (change)="emlOnChange($event)" [ngModelOptions]="{standalone: true}"  [(ngModel)]="me.Email" required></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="emailisnotValid">
+        Email must be a valid email address!
+      </span>
+      <ion-item [ngClass]="{'error-border' :  numisnotValid}" lines="full">
+        <ion-label position="floating">Contact Number</ion-label>
+        <ion-input type="text" name="ContactNumber" (change)="noOnChange($event)" [ngModelOptions]="{standalone: true}"  [(ngModel)]="me.ContactNumber" required></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="numisnotValid">
+        Contact Must consist of number Only!
+      </span>
+      <ion-item id="datepicker" lines="none">
+        <ion-label>BirthDate</ion-label>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="datetime" name="Birthdate" presentation="date" [ngModelOptions]="{standalone: true}"  [(ngModel)]="me.Birthdate"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-select placeholder="Gender" name="Gender" [ngModelOptions]="{standalone: true}"  [(ngModel)]="me.Sex">
+          <ion-select-option value="Male">Male</ion-select-option>
+          <ion-select-option value="Female">Female</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item [ngClass]="{'error-border' :  addrsisnotValid}" lines="full">
+        <ion-label position="floating">Home Address</ion-label>
+        <ion-input type="text" name="HomeAddress" (change)="addrsOnChange($event)" [ngModelOptions]="{standalone: true}"  [(ngModel)]="me.Address" required></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="addrsisnotValid">
+        This is not a valid Address!
+      </span>
+      <div clas="txtarea-div">
+        <ion-textarea [ngClass]="{'error-border' :  expertiesisnotValid}" [ngModelOptions]="{standalone: true}"  [(ngModel)]="me.Experties" class="custom-textarea" (change)="expertiesOnChange($event)" placeholder="Type your Experties here..." [autoGrow]="true">
+        </ion-textarea>
+      </div>
+      <span class="error ion-padding" *ngIf="expertiesisnotValid">
+        Experties Must not exceed 500 characters!
+      </span>
+      <div clas="txtarea-div">
+        <ion-textarea [ngClass]="{'error-border' :  experienceisnotValid}" [ngModelOptions]="{standalone: true}"  [(ngModel)]="me.WorkExperience" class="custom-textarea" (change)="experienceOnChange($event)"  placeholder="Type your Experience here..." [autoGrow]="true">
+        </ion-textarea>
+      </div>
+      <span class="error ion-padding" *ngIf="experienceisnotValid">
+        Experience Must not exceed 500 characters!
+      </span>
+      <ion-item [ngClass]="{'error-border' :  fileisnotValid }" lines="none">
+        <ion-label>Resume</ion-label>
+        <ion-input (change)="resumeOnchange($event)" type="file" name="resume" required></ion-input>
+      </ion-item>
+      <ion-item [ngClass]="{'error-border' :  fileisnotValid }" lines="none">
+        <ion-label>Certificate</ion-label>
+        <ion-input (change)="certOnchange($event)" type="file" name="certificate" required></ion-input>
+      </ion-item>
+    </div>
+    <div class="btn_group" style="margin-top: 30px;">
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" expand="block" shape="round" size="large">Update Information</ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </form>
+</ion-content>

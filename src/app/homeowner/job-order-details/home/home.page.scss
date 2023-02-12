@@ -1,0 +1,93 @@
+.custom-textarea {
+    --background: white;
+    --color: black;
+    --padding-end: 20px;
+    --padding-start: 20px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    --placeholder-opacity: 0.8; 
+    border: #66869f 1px solid;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+
+.custom-for-select{
+    border-radius: 50px;
+    height: 55px;
+    box-shadow: 1px 8px 8px 0px rgba(0,0,0,0.08);
+    --highlight-height: 0px;
+    margin-top: 15px;
+    border: #66869f 1px solid;
+}
+
+.my-card{
+    .card-img{
+        width: 100vw;
+        height: 200px;
+    }
+}
+
+.transparent-modal{
+    --ion-background-color: transparent;
+
+    &::part(content){
+        backdrop-filter: blur(12px);
+    }
+}
+swiper {
+    height: 100%;
+}
+
+.viewImage{
+    width: 100%;
+    height: 100%;
+}
+
+.content_div{
+    background: white;
+    width: 100%;
+    padding: 10px;
+
+    .joborder_details{
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: 0px 3px 6px rgba(0,0,0,3);
+        padding: 30px;
+
+        ion-grid{
+            padding: 0;
+            align-items: center;
+            ion-col{
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+            .flex_div{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                .round_div{
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 100%;
+                    background-color: white;
+                    position: relative;
+                    align-items: center;
+                }
+            }
+        }
+    }
+
+    .list_div{
+        display: flex;
+        justify-content: space-between;
+        border-radius: 5px;
+        box-shadow: 0px 3px 6px rgba(0,0,0,3);
+        margin-top: 20px;
+        padding: 15px;
+
+        ion-icon{
+            font-size: 20px;
+        }
+    }
+}

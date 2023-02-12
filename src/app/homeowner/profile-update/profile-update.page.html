@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Update Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-loading *ngIf="loading !== false"></app-loading>
+  <form id="reg_form" (submit)="submitForm($event)" novalidate>
+    <div class="reg_form">
+      <div id="header">
+        <img [src]="url" *ngIf="url" />
+      </div>
+      <ion-item [ngClass]="{'error-border' :  fileisnotValid }" lines="none">
+        <ion-input type="file" (change)="profilepicOnchange($event)" required></ion-input>
+      </ion-item>
+      <ion-item [ngClass]="{'error-border' :  fnameisnotValid}" lines="full">
+        <ion-label position="floating">Firstname</ion-label>
+        <ion-input type="text" name="Firstname" (change)="fnOnChange($event)" [(ngModel)]="me.Firstname" required></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="fnameisnotValid">
+        Firstname must contain letters with spaces only!
+      </span>
+      <ion-item [ngClass]="{'error-border' :  mnameisnotValid}" lines="full">
+        <ion-label position="floating">Middlename</ion-label>
+        <ion-input type="text" name="Middlename" (change)="mnOnChange($event)" [(ngModel)]="me.Middlename" required></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="mnameisnotValid">
+        Middlename must contain letters with spaces only!
+      </span>
+      <ion-item [ngClass]="{'error-border' :  lnameisnotValid}" lines="full">
+        <ion-label position="floating">Lastname</ion-label>
+        <ion-input type="text" name="Lastname" (change)="lnOnChange($event)" [(ngModel)]="me.Lastname"  required></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="lnameisnotValid">
+        Lastname must contain letters with spaces only!
+      </span>
+      <ion-item [ngClass]="{'error-border' :  emailisnotValid}" lines="full">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="text" name="Email" (change)="emlOnChange($event)" [(ngModel)]="me.Email" required></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="emailisnotValid">
+        Email must be a valid email address!
+      </span>
+      <ion-item [ngClass]="{'error-border' :  numisnotValid}" lines="full">
+        <ion-label position="floating">Contact Number</ion-label>
+        <ion-input type="text" name="ContactNumber" (change)="noOnChange($event)" [(ngModel)]="me.ContactNumber" required></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="numisnotValid">
+        Contact Must consist of number Only!
+      </span>
+      <ion-item id="datepicker" lines="none">
+        <ion-label>BirthDate</ion-label>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="datetime" name="Birthdate" [(ngModel)]="me.Birthdate" presentation="date"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-select placeholder="Gender" name="Gender" [(ngModel)]="me.Sex">
+          <ion-select-option value="Male">Male</ion-select-option>
+          <ion-select-option value="Female">Female</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item [ngClass]="{'error-border' : addrsisnotValid}" lines="full">
+        <ion-label position="floating">Home Address</ion-label>
+        <ion-input type="text" name="HomeAddress" (change)="addrsOnChange($event)" [(ngModel)]="me.Address" required></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="addrsisnotValid">
+        This is not a valid Address!
+      </span>
+    </div>
+    <div class="btn_group">
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" expand="block" shape="round" size="large" color="primary">Update Information</ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </form>
+</ion-content>

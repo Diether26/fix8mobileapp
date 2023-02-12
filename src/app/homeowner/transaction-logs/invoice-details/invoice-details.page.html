@@ -1,0 +1,170 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>INVOICE # {{ Id }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-loading *ngIf="loading !== false"></app-loading>
+  <ion-card *ngIf="invoice">
+    <ion-card-header>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>{{ invoice.PaymentMethod }}</ion-card-title>
+          <ion-card-subtitle>Payment Method</ion-card-subtitle>
+        </ion-col>
+        <!-- <ion-col>
+          <ion-card-title [ngStyle]="{'color': (invoice._Status === 'Paid') ? 'green' : 'red' }">{{ invoice._Status }}</ion-card-title>
+          <ion-card-subtitle>Status</ion-card-subtitle>
+        </ion-col> -->
+      </ion-row>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>{{ formatDate(invoice.CreateDate) }}</ion-card-title>
+          <ion-card-subtitle>Create Date</ion-card-subtitle>
+        </ion-col>
+        <ion-col>
+          <ion-card-title>{{ formatDate(invoice.DueDate) }}</ion-card-title>
+          <ion-card-subtitle>Due Date</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>{{ formatToPHPCurrency(invoice.ServiceFee) }}</ion-card-title>
+          <ion-card-subtitle>Service Fee</ion-card-subtitle>
+        </ion-col>
+        <ion-col>
+          <ion-card-title>{{ formatToPHPCurrency(calculateAmountItems(invoice.TotalCost, invoice.ServiceFee)) }}</ion-card-title>
+          <ion-card-subtitle>Items Amount</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>{{ formatToPHPCurrency(invoice.TotalCost) }}</ion-card-title>
+          <ion-card-subtitle>Total Cost</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <ion-item lines="none" *ngIf="invoice_items.length > 0">
+    <div style="width: 100%; height: 10px; border-bottom: 1px solid black; text-align: center">
+      <span style="font-size: 18px; background-color: #F3F5F6; padding: 0 10px;">
+          Invoice Items
+      </span>
+    </div>
+  </ion-item>
+  <ion-card *ngFor="let item of invoice_items">
+    <ion-card-header>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>{{ item.Name }}</ion-card-title>
+          <ion-card-subtitle>Name / Description</ion-card-subtitle>
+        </ion-col>
+        <ion-col>
+          <ion-card-title>{{ item.Type }}</ion-card-title>
+          <ion-card-subtitle>Type</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>{{ item.Quantity }}</ion-card-title>
+          <ion-card-subtitle>Quantity</ion-card-subtitle>
+        </ion-col>
+        <ion-col>
+          <ion-card-title>{{ item.Unit }}</ion-card-title>
+          <ion-card-subtitle>Unit</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>{{ formatToPHPCurrency(item.Price) }}</ion-card-title>
+          <ion-card-subtitle>Price</ion-card-subtitle>
+        </ion-col>
+        <ion-col>
+          <ion-card-title>{{ formatToPHPCurrency(calculateAmountItems(invoice.TotalCost, invoice.ServiceFee)) }}</ion-card-title>
+          <ion-card-subtitle>Items Amount</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-modal [isOpen]="modal === 'PAYMENT'">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="secondary">
+          <ion-title style="text-align: left;">PAYMENT DETAILS</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="initModal('')">Cancel</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item lines="none">
+          <div style="width: 100%; height: 10px; border-bottom: 1px solid black; text-align: center">
+            <span style="font-size: 18px; background-color: #F3F5F6; padding: 0 10px;">
+              Payment Receipt
+            </span>
+          </div>
+        </ion-item>
+        <ion-item lines="none" style="margin-top: 1%; margin-bottom: 1%;">
+          <img *ngIf="payment_details && payment_details.PaymentMethod === 'E-Wallet (GCASH)'" src="{{paymentReceipt_url}}{{ payment_details.PaymentReceipt }}">
+        </ion-item>   
+        <ion-item lines="none">
+          <div style="width: 100%; height: 10px; border-bottom: 1px solid black; text-align: center">
+            <span style="font-size: 18px; background-color: #F3F5F6; padding: 0 10px;">
+              Reference Number
+            </span>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-col class="ion-text-center">
+            <ion-card-title>{{ payment_details.ReferenceNumber }}</ion-card-title>
+          </ion-col>
+        </ion-item>
+        <ion-item lines="none">
+          <div style="width: 100%; height: 10px; border-bottom: 1px solid black; text-align: center">
+            <span style="font-size: 18px; background-color: #F3F5F6; padding: 0 10px;">
+              Amount
+            </span>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-col class="ion-text-center">
+            <ion-card-title>{{ formatToPHPCurrency(payment_details.Amount) }}</ion-card-title>
+          </ion-col>
+        </ion-item>
+        <ion-item lines="none">
+          <div style="width: 100%; height: 10px; border-bottom: 1px solid black; text-align: center">
+            <span style="font-size: 18px; background-color: #F3F5F6; padding: 0 10px;">
+              Date Created
+            </span>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-col class="ion-text-center">
+            <ion-card-title>{{ formatDate(payment_details.DateCreated) }}</ion-card-title>
+          </ion-col>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+<ion-footer no-border *ngIf="invoice">
+  <ion-toolbar>  
+    <ion-row style="margin-top: 5%; margin-bottom: 5%;">
+      <ion-col class="ion-text-center">      
+        <ion-button expand="block" shape="round" color="primary" size="large" *ngIf="invoice._Status === 'Paid'" (click)="viewPaymentDetails(invoice.PaymentID)">VIEW PAYMENT</ion-button>
+        <ion-label *ngIf="invoice._Status === 'Requested'">Waiting For Payment</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

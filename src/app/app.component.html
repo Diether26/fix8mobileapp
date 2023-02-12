@@ -1,0 +1,47 @@
+<ion-app>
+  <app-loading *ngIf="loading !== false"></app-loading>
+  <ion-split-pane contentId="main-content" *ngIf="isElectrician === true || isHomeowner === true">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
+        <ion-list id="inbox-list">
+          <ion-list-header id="menu_header">
+            <ion-thumbnail>
+              <ion-img class="img" src="{{avatar_url}}{{url}}"></ion-img>
+            </ion-thumbnail>
+            <ion-label class="ion-padding-start">
+              <h1>{{Name}}</h1>
+              <p>{{Email}}</p>
+            </ion-label>
+          </ion-list-header>
+          <div *ngIf="isHomeowner">
+            <ion-menu-toggle auto-hide="false" *ngFor="let p of homeownerPages; let i = index">
+              <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+                <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </div>
+          <div *ngIf="isElectrician">
+            <ion-menu-toggle auto-hide="false" *ngFor="let p of electricianPages; let i = index">
+              <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+                <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </div>
+        </ion-list>
+
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages2; let i = index">
+          <ion-item (click)="logout()" lines="none" detail="false">
+            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+            <ion-label>{{ p.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+  <ion-split-pane contentId="main-content2" *ngIf="!isElectrician && !isHomeowner">
+    <ion-router-outlet id="main-content2"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
